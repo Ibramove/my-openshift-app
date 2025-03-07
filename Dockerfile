@@ -1,18 +1,18 @@
-# Utilisation de l'image Node.js officielle
 FROM node:18
 
-# Définition du répertoire de travail
 WORKDIR /app
 
-# Copie des fichiers et installation des dépendances
-COPY package.json package-lock.json ./
+# Copier package.json et package-lock.json (si existe)
+COPY package*.json ./
+
+# Installer les dépendances
 RUN npm install
 
-# Copie du code source
+# Copier le reste du code de l'application
 COPY . .
 
-# Exposition du port 8080
+# Exposer le port sur lequel l'application fonctionne
 EXPOSE 8080
 
-# Commande de démarrage
+# Lancer l'application
 CMD ["node", "server.js"]
